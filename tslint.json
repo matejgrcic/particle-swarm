@@ -1,0 +1,42 @@
+{
+	"extends": "tslint-config-airbnb",
+	"linterOptions": {
+	  "exclude": [
+		"build",
+		"node_modules",
+		"dist"
+		]
+	},
+	"rules": {
+	  "indent": [
+		true,
+		"spaces",
+		4
+	  ],
+	  "ter-indent": [
+		true,
+		4,
+		{
+		  "SwitchCase": 1
+		}
+	  ],
+	  "semicolon": [
+		true,
+		"always",
+		"ignore-bound-class-methods"
+	  ],
+	  "trailing-comma": [
+		false
+	  ],
+	  "ter-arrow-parens": [
+		false
+	  ],
+	  "max-line-length": [
+		true,
+		121
+	  ],
+	  "import-name": false,
+	  "function-name": [false],
+	  "no-boolean-literal-compare": false
+	}
+  }

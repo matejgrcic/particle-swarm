@@ -1,0 +1,45 @@
+{
+  "name": "particle-swarm",
+  "version": "0.0.1",
+  "description": "Fully informed particle swarm optimization library",
+  "main": "dist/index.js",
+  "types" : "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run lint && npm run test && npm run tsc && npm run test-js",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test-js": "mocha --reporter spec",
+    "demo": "node ./build/demo.js",
+    "tsc": "tsc",
+    "lint": "tslint -c tslint.json --project tsconfig.json"
+  },
+  "author": "Matej Grcic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matejgrcic/particle-swarm.git"
+  },
+  "bugs": "https://github.com/matejgrcic/particle-swarm/issues",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/lodash": "^4.14.116",
+    "@types/mocha": "^5.2.5",
+    "@types/typescript": "^2.0.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "keywords": [
+    "particle swarm",
+    "particle swarm optimization",
+    "optimization",
+    "pso",
+    "pso js",
+    "fully informed pso"
+  ]
+}
