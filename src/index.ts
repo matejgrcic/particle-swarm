@@ -213,7 +213,7 @@ const createOptimizer = (options: Options) => new ParticleSwarmOptimizer(options
 export default createOptimizer;
 
 export class Util {
-    static MIN_CONSTRICTION_FACTOR = 4;
+    static MIN_CONSTRICTION_FACTOR = 4.;
 
     static getRandomArbitrary(min: number, max: number, randomFunction: () => number) {
         return randomFunction() * (max - min) + min;
@@ -242,8 +242,8 @@ export class Util {
         const constrictionFactor = individualFactor + socialFactor;
         if (constrictionFactor <= Util.MIN_CONSTRICTION_FACTOR) {
             throw new Error(
-                `constrictionFactor (sum of individual and social factor)
-                 should be greater than ${Util.MIN_CONSTRICTION_FACTOR}, current is: ${constrictionFactor}`);
+        // tslint:disable-next-line
+                `constrictionFactor (sum of individual and social factor) should be greater than ${Util.MIN_CONSTRICTION_FACTOR}, current is: ${constrictionFactor}`);
         }
         return 2. / Math.abs(
             2. - constrictionFactor - Math.sqrt(constrictionFactor * constrictionFactor - 4 * constrictionFactor)

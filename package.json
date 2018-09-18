@@ -1,6 +1,6 @@
 {
   "name": "particle-swarm",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Fully informed particle swarm optimization library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "build": "npm run lint && npm run test && npm run tsc && npm run test-js",
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "test-js": "mocha --reporter spec",
-    "demo": "node ./build/demo.js",
+    "demo": "node ./demo/demo_example.js",
     "tsc": "tsc",
     "lint": "tslint -c tslint.json --project tsconfig.json"
   },

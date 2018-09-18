@@ -158,11 +158,13 @@ var Util = /** @class */ (function () {
     Util.constrictionFactor = function (individualFactor, socialFactor) {
         var constrictionFactor = individualFactor + socialFactor;
         if (constrictionFactor <= Util.MIN_CONSTRICTION_FACTOR) {
-            throw new Error("constrictionFactor (sum of individual and social factor)\n                 should be greater than " + Util.MIN_CONSTRICTION_FACTOR + ", current is: " + constrictionFactor);
+            throw new Error(
+            // tslint:disable-next-line
+            "constrictionFactor (sum of individual and social factor) should be greater than " + Util.MIN_CONSTRICTION_FACTOR + ", current is: " + constrictionFactor);
         }
         return 2. / Math.abs(2. - constrictionFactor - Math.sqrt(constrictionFactor * constrictionFactor - 4 * constrictionFactor));
     };
-    Util.MIN_CONSTRICTION_FACTOR = 4;
+    Util.MIN_CONSTRICTION_FACTOR = 4.;
     return Util;
 }());
 exports.Util = Util;
