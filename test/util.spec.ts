@@ -37,4 +37,14 @@ describe('Util', () => {
             expect(value).to.be.equal(0);
         });
     });
+
+    describe('constrictionFactor()', () => {
+        it('should calculate correct constriction factor', () => {
+            expect(Util.constrictionFactor(2.05, 2.05)).to.be.within(0.729, 0.73);
+        });
+
+        it('should throw for constriction factor lower than MIN_PSI', () => {
+            expect(() => Util.constrictionFactor(1., 2.05)).to.throw;
+        });
+    });
 });
