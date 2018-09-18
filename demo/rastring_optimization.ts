@@ -1,4 +1,3 @@
-import { reduce as _reduce } from 'lodash';
 import createOptimizer from '../src/index';
 
 const RASTRING_PARAMS = {
@@ -11,8 +10,7 @@ const INERTIA_MIN_FACTOR = 0.5;
 const INERTIA_MAX_FACTOR = 1.;
 
 const rastringFunction = (position: number[]): number => {
-    return _reduce(
-        position,
+    return position.reduce(
         (sum, x) => sum + Math.pow(x, 2) - RASTRING_PARAMS.A * Math.cos(2. * Math.PI * x),
         RASTRING_PARAMS.A * RASTRING_PARAMS.n
     );

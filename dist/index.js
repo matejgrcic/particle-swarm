@@ -11,7 +11,6 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var lodash_1 = require("lodash");
 var Particle = /** @class */ (function () {
     function Particle() {
         this.bestPosition = [];
@@ -57,7 +56,7 @@ var ParticleSwarmOptimizer = /** @class */ (function () {
         if (!population.length) {
             throw new Error('Population size is 0!');
         }
-        var particle = lodash_1.minBy(population, 'bestFitness');
+        var particle = Util.minBy(population, 'bestFitness');
         return { globalBestPosition: particle.bestPosition, globalBestFitness: particle.bestFitness };
     };
     ParticleSwarmOptimizer.prototype.notifyListeners = function (payload) {
@@ -140,6 +139,14 @@ var Util = /** @class */ (function () {
             return max;
         }
         return value;
+    };
+    Util.minBy = function (items, key) {
+        if (!items.length) {
+            return undefined;
+        }
+        var min = items[0];
+        items.forEach(function (item) { return min = item[key] < min[key] ? item : min; });
+        return min;
     };
     return Util;
 }());

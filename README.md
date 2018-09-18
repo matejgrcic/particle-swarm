@@ -10,10 +10,10 @@ With npm:
 npm install --save particle-swarm
 ```
 
-With yarn
+With yarn:
 
 ```
-yarn add  particle-swarm
+yarn add particle-swarm
 ```
 
 ## Usage

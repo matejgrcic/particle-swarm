@@ -1,5 +1,3 @@
-import { minBy as _minBy } from 'lodash';
-
 export class Particle {
     bestPosition: number[] = [];
     position: number[] = [];
@@ -79,7 +77,7 @@ class ParticleSwarmOptimizer {
         if (!population.length) {
             throw new Error('Population size is 0!');
         }
-        const particle = _minBy(population, 'bestFitness');
+        const particle = Util.minBy(population, 'bestFitness');
         return { globalBestPosition: particle!.bestPosition, globalBestFitness: particle!.bestFitness };
     }
 
@@ -210,5 +208,14 @@ export class Util {
             return max;
         }
         return value;
+    }
+
+    static minBy<T>(items: T[], key: string): T | undefined {
+        if (!items.length) {
+            return undefined;
+        }
+        let min = items[0];
+        items.forEach((item) => min = (item as any)[key] < (min as any)[key] ? item : min);
+        return min;
     }
 }

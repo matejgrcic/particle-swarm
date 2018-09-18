@@ -71,4 +71,5 @@ export default createOptimizer;
 export declare class Util {
     static getRandomArbitrary(min: number, max: number, randomFunction: () => number): number;
     static getValueFromRange(min: number, max: number, value: number): number;
+    static minBy<T>(items: T[], key: string): T | undefined;
 }
