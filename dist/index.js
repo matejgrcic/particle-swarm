@@ -23,6 +23,7 @@ var Particle = /** @class */ (function () {
 }());
 exports.Particle = Particle;
 var defaultOptions = {
+    useConstrictionFactor: false,
     randomFunction: Math.random,
     callbackFn: function () { },
 };
@@ -116,10 +117,16 @@ var ParticleSwarmOptimizer = /** @class */ (function () {
             + this.options.socialFactor(meta.iteration)
                 * this.options.randomFunction() * (meta.globalBestPosition - meta.currentPosition);
         newVelocity = Util.getValueFromRange(meta.minVelocity, meta.maxVelocity, newVelocity);
-        return newVelocity;
+        return newVelocity * this.constrictionFactor(this.options.individualFactor(meta.iteration), this.options.socialFactor(meta.iteration));
     };
     ParticleSwarmOptimizer.prototype.updateParticlePosition = function (meta) {
         return Util.getValueFromRange(meta.minPosition, meta.maxPosition, meta.position + meta.velocity);
+    };
+    ParticleSwarmOptimizer.prototype.constrictionFactor = function (individualFactor, socialFactor) {
+        if (!this.options.useConstrictionFactor) {
+            return 1.;
+        }
+        return Util.constrictionFactor(individualFactor, socialFactor);
     };
     return ParticleSwarmOptimizer;
 }());
@@ -148,6 +155,14 @@ var Util = /** @class */ (function () {
         items.forEach(function (item) { return min = item[key] < min[key] ? item : min; });
         return min;
     };
+    Util.constrictionFactor = function (individualFactor, socialFactor) {
+        var constrictionFactor = individualFactor + socialFactor;
+        if (constrictionFactor <= Util.MIN_CONSTRICTION_FACTOR) {
+            throw new Error("constrictionFactor (sum of individual and social factor)\n                 should be greater than " + Util.MIN_CONSTRICTION_FACTOR + ", current is: " + constrictionFactor);
+        }
+        return 2. / Math.abs(2. - constrictionFactor - Math.sqrt(constrictionFactor * constrictionFactor - 4 * constrictionFactor));
+    };
+    Util.MIN_CONSTRICTION_FACTOR = 4;
     return Util;
 }());
 exports.Util = Util;

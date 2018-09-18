@@ -26,6 +26,7 @@ const inertiaFactor = (iteration: number): number => {
 export const createRastringOptimizer = (callbackFn?: any): any => createOptimizer({
     callbackFn,
     inertiaFactor,
+    useConstrictionFactor: true,
     maxVelocity:[2.05, 2.05],
     minVelocity: [-2.05, -2.05],
     maxPosition: [5.12, 5.12],

@@ -10,6 +10,7 @@ interface Solution {
     globalBestFitness: number;
 }
 interface Options {
+    useConstrictionFactor?: boolean;
     maxVelocity: number[];
     minVelocity: number[];
     maxPosition: number[];
@@ -28,6 +29,7 @@ interface Options {
         globalBestPosition: number[];
         globalBestFitness: number;
         iteration: number;
+        population: Particle[];
     }) => void;
 }
 declare class ParticleSwarmOptimizer {
@@ -65,11 +67,14 @@ declare class ParticleSwarmOptimizer {
         minPosition: number;
         maxPosition: number;
     }): number;
+    constrictionFactor(individualFactor: number, socialFactor: number): number;
 }
 declare const createOptimizer: (options: Options) => ParticleSwarmOptimizer;
 export default createOptimizer;
 export declare class Util {
+    static MIN_CONSTRICTION_FACTOR: number;
     static getRandomArbitrary(min: number, max: number, randomFunction: () => number): number;
     static getValueFromRange(min: number, max: number, value: number): number;
     static minBy<T>(items: T[], key: string): T | undefined;
+    static constrictionFactor(individualFactor: number, socialFactor: number): number;
 }

@@ -155,4 +155,17 @@ describe('ParticleSwarmOptimization', () => {
             expect(particle.velocity).to.deep.equal([-2, -2]);
         });
     });
+
+    describe('constrictionFactor', () => {
+        it('should return 1 if useConstrictionFactor is false', () => {
+            const algorithm = createOptimizer(defaultMeta);
+            expect(algorithm.constrictionFactor(2.3, 3.3)).to.be.equal(1);
+            expect(algorithm.constrictionFactor(1, 0)).to.be.equal(1);
+        });
+
+        it('should return value if useConstrictionFactor is true', () => {
+            const algorithm = createOptimizer({ ...defaultMeta, useConstrictionFactor: true });
+            expect(algorithm.constrictionFactor(2.05, 2.05)).to.be.within(0.729, 0.73);
+        });
+    });
 });

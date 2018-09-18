@@ -12,6 +12,7 @@ interface Solution {
 }
 
 interface Options {
+    useConstrictionFactor?: boolean;
     maxVelocity: number[];
     minVelocity: number[];
     maxPosition: number[];
@@ -26,10 +27,16 @@ interface Options {
     socialFactor: (iteration: number) => number;
     individualFactor: (iteration: number) => number;
     inertiaFactor: (iteration: number) => number;
-    callbackFn?: (meta: { globalBestPosition: number[], globalBestFitness: number, iteration: number }) => void;
+    callbackFn?: (meta: {
+        globalBestPosition: number[],
+        globalBestFitness: number,
+        iteration: number,
+        population: Particle[],
+    }) => void;
 }
 
 const defaultOptions = {
+    useConstrictionFactor: false,
     randomFunction: Math.random,
     callbackFn: () => {},
 };
@@ -174,7 +181,10 @@ class ParticleSwarmOptimizer {
             meta.maxVelocity,
             newVelocity
         );
-        return newVelocity;
+        return newVelocity * this.constrictionFactor(
+            this.options.individualFactor(meta.iteration),
+            this.options.socialFactor(meta.iteration)
+        );
     }
 
     updateParticlePosition(meta: {
@@ -189,6 +199,13 @@ class ParticleSwarmOptimizer {
             meta.position + meta.velocity
         );
     }
+
+    constrictionFactor(individualFactor: number, socialFactor: number): number {
+        if (!this.options.useConstrictionFactor) {
+            return 1.;
+        }
+        return Util.constrictionFactor(individualFactor, socialFactor);
+    }
 }
 
 const createOptimizer = (options: Options) => new ParticleSwarmOptimizer(options);
@@ -196,6 +213,8 @@ const createOptimizer = (options: Options) => new ParticleSwarmOptimizer(options
 export default createOptimizer;
 
 export class Util {
+    static MIN_CONSTRICTION_FACTOR = 4;
+
     static getRandomArbitrary(min: number, max: number, randomFunction: () => number) {
         return randomFunction() * (max - min) + min;
     }
@@ -217,5 +236,17 @@ export class Util {
         let min = items[0];
         items.forEach((item) => min = (item as any)[key] < (min as any)[key] ? item : min);
         return min;
+    }
+
+    static constrictionFactor(individualFactor: number, socialFactor: number) {
+        const constrictionFactor = individualFactor + socialFactor;
+        if (constrictionFactor <= Util.MIN_CONSTRICTION_FACTOR) {
+            throw new Error(
+                `constrictionFactor (sum of individual and social factor)
+                 should be greater than ${Util.MIN_CONSTRICTION_FACTOR}, current is: ${constrictionFactor}`);
+        }
+        return 2. / Math.abs(
+            2. - constrictionFactor - Math.sqrt(constrictionFactor * constrictionFactor - 4 * constrictionFactor)
+        );
     }
 }
