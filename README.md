@@ -33,8 +33,8 @@ const optimizer = createOptimizer({
     desiredFitness: 0,
     desiredPrecision: 1E-5,
     fitnessFunction: (x) => x*x,
-    socialFactor: (iteration) => 2.,
-    individualFactor: (iteration) => 2.,
+    socialFactor: (iteration) => 2.05,
+    individualFactor: (iteration) => 2.05,
     inertiaFactor: (iteration) => 1.,
     callbackFn: (meta) => console.log(meta.globalBestFitness),
 });
@@ -46,10 +46,10 @@ const solution = optimizer.start();
 
 #### Required parameters
 
-* ```maxVelocity``` - max velocity of particle by each dimension
-* ```minVelocity``` - min velocity of particle by each dimension
-* ```maxPosition``` - max position of particle by each dimension
-* ```maxPosition``` - min position of particle by each dimension
+* ```maxVelocity``` - max velocity of particle for each dimension
+* ```minVelocity``` - min velocity of particle for each dimension
+* ```maxPosition``` - max position of particle for each dimension
+* ```maxPosition``` - min position of particle for each dimension
 * ```populationSize``` - size of population, should be greater than zero
 * ```numberOfDimensions``` - number of dimensions, should be greater than zero
 * ```maxIterations``` - max number of iterations, should be greater than zero
@@ -73,7 +73,7 @@ const solution = optimizer.start();
 * Parameter _inertiaFactor_ should have value of 1 in first iteration and decline in each iteration
 * Set _useConstrictionFactor_ to true if you want to prevent divergence of algorithm
 
-**Note:** Please see demo Rastring function example in demo file.
+**Note:** Please see finding global minimum of Rastring function example in demo file.
 
 ## Authors
 
