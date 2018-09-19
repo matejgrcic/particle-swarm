@@ -1,6 +1,6 @@
 {
   "name": "particle-swarm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fully informed particle swarm optimization library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
