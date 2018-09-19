@@ -69,7 +69,7 @@ const solution = optimizer.start();
 ### Tips
 
 * Parameters _maxVelocity_, _minVelocity_, _maxPosition_ and _maxPosition_ must be arrays of length _numberOfDimensions_
-* Parameters _socialFactor_ and _individualFactor_ should return value of 2.05, 
+* Parameters _socialFactor_ and _individualFactor_ should return value of 2.05
 * Parameter _inertiaFactor_ should have value of 1 in first iteration and decline in each iteration
 * Set _useConstrictionFactor_ to true if you want to prevent divergence of algorithm
 
