@@ -63,7 +63,7 @@ const solution = optimizer.start();
 #### Optional parameters
 
 * ```useConstrictionFactor``` - constriction factor prevents divergence of algorithm, default to false
-* ```randomFunction``` - function that returns random number from interval [0 ,1], default to Math.random
+* ```randomFunction``` - function that returns random number from interval [0, 1], default to Math.random
 * ```callbackFn``` - function that is called after each iteration, can be used as a observer
 
 ### Tips
