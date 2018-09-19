@@ -38,6 +38,23 @@ describe('Util', () => {
         });
     });
 
+    describe('minBy()', () => {
+        it('should return correct value', () => {
+            const array = [
+                { a: 2 },
+                { a: 3 },
+                { a: 1 },
+                { a: 5 },
+            ];
+            expect(Util.minBy(array, 'a')).to.be.deep.equal({ a: 1 });
+        });
+
+        it('should return undefined for empty array', () => {
+            const array: any = [];
+            expect(Util.minBy(array, 'a')).to.be.undefined;
+        });
+    });
+
     describe('constrictionFactor()', () => {
         it('should calculate correct constriction factor', () => {
             expect(Util.constrictionFactor(2.05, 2.05)).to.be.within(0.729, 0.73);
