@@ -50,9 +50,9 @@ const solution = optimizer.start();
 * ```minVelocity``` - min velocity of particle for each dimension
 * ```maxPosition``` - max position of particle for each dimension
 * ```maxPosition``` - min position of particle for each dimension
-* ```populationSize``` - size of population, should be greater than zero
-* ```numberOfDimensions``` - number of dimensions, should be greater than zero
-* ```maxIterations``` - max number of iterations, should be greater than zero
+* ```populationSize``` - size of population, must be greater than zero
+* ```numberOfDimensions``` - number of dimensions, must be greater than zero
+* ```maxIterations``` - max number of iterations, must be greater than zero
 * ```desiredFitness``` - desired fitness algorithm should achieve
 * ```desiredPrecision``` - desired precision when comparing desired fitness and global best fitness
 * ```fitnessFunction``` - function that evaluates each particle, algorithm is searching for position that gives smallest value of this function
@@ -63,21 +63,21 @@ const solution = optimizer.start();
 #### Optional parameters
 
 * ```useConstrictionFactor``` - constriction factor prevents divergence of algorithm, default to false
-* ```randomFunction``` - function that creates returns random number from interval [0 ,1], default to Math.random
+* ```randomFunction``` - function that returns random number from interval [0 ,1], default to Math.random
 * ```callbackFn``` - function that is called after each iteration, can be used as a observer
 
 ### Tips
 
-* Parameters _maxVelocity_, _minVelocity_, _maxPosition_ and _maxPosition_ should be arrays of length _numberOfDimensions_
+* Parameters _maxVelocity_, _minVelocity_, _maxPosition_ and _maxPosition_ must be arrays of length _numberOfDimensions_
 * Parameters _socialFactor_ and _individualFactor_ should return value of 2.05, 
 * Parameter _inertiaFactor_ should have value of 1 in first iteration and decline in each iteration
 * Set _useConstrictionFactor_ to true if you want to prevent divergence of algorithm
 
-**Note:** Please see finding global minimum of Rastring function example in demo file.
+**Note:** Please see _finding global minimum of Rastring function_ example in demo file.
 
 ## Authors
 
-* **_Matej Grcic_** - [github](https://github.com/matejgrcic) [LinkedIn](https://www.linkedin.com/in/matej-grcic/)
+* **_Matej Grcic_** - [Github](https://github.com/matejgrcic) [LinkedIn](https://www.linkedin.com/in/matej-grcic/)
 
 ## License
 
