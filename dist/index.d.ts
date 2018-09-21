@@ -18,13 +18,13 @@ interface Options {
     populationSize: number;
     numberOfDimensions: number;
     maxIterations: number;
-    desiredFitness: number;
-    desiredPrecision: number;
-    randomFunction?: () => number;
     fitnessFunction: (position: number[]) => number;
-    socialFactor: (iteration: number) => number;
-    individualFactor: (iteration: number) => number;
-    inertiaFactor: (iteration: number) => number;
+    desiredFitness?: number;
+    desiredPrecision?: number;
+    randomFunction?: () => number;
+    socialFactor?: (iteration: number) => number;
+    individualFactor?: (iteration: number) => number;
+    inertiaFactor?: (iteration: number) => number;
     callbackFn?: (meta: {
         globalBestPosition: number[];
         globalBestFitness: number;

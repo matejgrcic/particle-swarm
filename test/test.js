@@ -15,8 +15,8 @@ describe('createOptimizer()', () => {
             desiredPrecision: 1E-3,
             fitnessFunction: (x) => x[0],
             inertiaFactor: () => 1.,
-            socialFactor: () => 2.,
-            individualFactor: () => 2.,
+            socialFactor: () => 2.05,
+            individualFactor: () => 2.05,
         })).not.to.throw;
     });
     it('should start optimizer', () => {

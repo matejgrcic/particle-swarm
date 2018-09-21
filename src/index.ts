@@ -20,13 +20,13 @@ interface Options {
     populationSize: number;
     numberOfDimensions: number;
     maxIterations: number;
-    desiredFitness: number;
-    desiredPrecision: number;
-    randomFunction?: () => number;
     fitnessFunction: (position: number[]) => number;
-    socialFactor: (iteration: number) => number;
-    individualFactor: (iteration: number) => number;
-    inertiaFactor: (iteration: number) => number;
+    desiredFitness?: number;
+    desiredPrecision?: number;
+    randomFunction?: () => number;
+    socialFactor?: (iteration: number) => number;
+    individualFactor?: (iteration: number) => number;
+    inertiaFactor?: (iteration: number) => number;
     callbackFn?: (meta: {
         globalBestPosition: number[],
         globalBestFitness: number,
@@ -38,6 +38,11 @@ interface Options {
 const defaultOptions = {
     useConstrictionFactor: false,
     randomFunction: Math.random,
+    socialFactor: () => 2.05,
+    individualFactor: () => 2.05,
+    inertiaFactor: () => 1.,
+    desiredFitness: 0.,
+    desiredPrecision: 1E-5,
     callbackFn: () => {},
 };
 
@@ -101,7 +106,7 @@ class ParticleSwarmOptimizer {
     }
 
     isDesiredFitness(globalBestFitness: number): boolean {
-        return Math.abs(this.options.desiredFitness - globalBestFitness) < this.options.desiredPrecision;
+        return Math.abs(this.options.desiredFitness! - globalBestFitness) < this.options.desiredPrecision!;
     }
 
     updatePopulation(population: Particle[], globalBestPosition: number[], iteration: number) {
@@ -171,10 +176,10 @@ class ParticleSwarmOptimizer {
             maxVelocity: number,
         }
     ): number {
-        let newVelocity = this.options.inertiaFactor(meta.iteration) * meta.velocity
-            + this.options.individualFactor(meta.iteration)
+        let newVelocity = this.options.inertiaFactor!(meta.iteration) * meta.velocity
+            + this.options.individualFactor!(meta.iteration)
                 * this.options.randomFunction!() * (meta.particleBestPosition - meta.currentPosition)
-            + this.options.socialFactor(meta.iteration)
+            + this.options.socialFactor!(meta.iteration)
                 * this.options.randomFunction!() * (meta.globalBestPosition - meta.currentPosition);
         newVelocity = Util.getValueFromRange(
             meta.minVelocity,
@@ -182,8 +187,8 @@ class ParticleSwarmOptimizer {
             newVelocity
         );
         return newVelocity * this.constrictionFactor(
-            this.options.individualFactor(meta.iteration),
-            this.options.socialFactor(meta.iteration)
+            this.options.individualFactor!(meta.iteration),
+            this.options.socialFactor!(meta.iteration)
         );
     }
 

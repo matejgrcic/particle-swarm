@@ -25,6 +25,11 @@ exports.Particle = Particle;
 var defaultOptions = {
     useConstrictionFactor: false,
     randomFunction: Math.random,
+    socialFactor: function () { return 2.05; },
+    individualFactor: function () { return 2.05; },
+    inertiaFactor: function () { return 1.; },
+    desiredFitness: 0.,
+    desiredPrecision: 1E-5,
     callbackFn: function () { },
 };
 var ParticleSwarmOptimizer = /** @class */ (function () {
