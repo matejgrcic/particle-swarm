@@ -15,7 +15,7 @@ With yarn:
 yarn add particle-swarm
 ```
 
-## Basic usage
+## Basic usage (with default parameters)
 
 ```javascript
 var createOptimizer = require('particle-swarm').default;
@@ -34,8 +34,7 @@ var optimizer = createOptimizer({
 var solution = optimizer.start();
 ```
 
-
-## Complex usage
+## Complex usage (with all parameters)
 
 ```javascript
 import createOptimizer from 'particle-swarm';
