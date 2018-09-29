@@ -1,7 +1,7 @@
 # Particle-swarm.js
-
 Particle-swarm.js is a javascript implementation of a fully-informed particle swarm optimization algorithm.
 
+![Alt text](/static/Logo_full.svg?raw=true "Particle swarm")
 ## Installing
 
 With npm:
@@ -18,7 +18,7 @@ yarn add particle-swarm
 
 ## Basic usage
 
-```
+```javascript
 var createOptimizer = require('particle-swarm').default;
 
 var optimizer = createOptimizer({
@@ -38,7 +38,7 @@ var solution = optimizer.start();
 
 ## Complex usage
 
-```
+```javascript
 import createOptimizer from 'particle-swarm';
 
 const optimizer = createOptimizer({
