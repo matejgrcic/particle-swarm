@@ -65,11 +65,11 @@ var ParticleSwarmOptimizer = /** @class */ (function () {
         var particle = Util.minBy(population, 'bestFitness');
         return { globalBestPosition: particle.bestPosition, globalBestFitness: particle.bestFitness };
     };
-    ParticleSwarmOptimizer.prototype.notifyListeners = function (payload) {
+    ParticleSwarmOptimizer.prototype.notifyListeners = function (meta) {
         if (!this.options.callbackFn) {
             return;
         }
-        this.options.callbackFn(payload);
+        this.options.callbackFn(meta);
     };
     ParticleSwarmOptimizer.prototype.isDesiredFitness = function (globalBestFitness) {
         return Math.abs(this.options.desiredFitness - globalBestFitness) < this.options.desiredPrecision;

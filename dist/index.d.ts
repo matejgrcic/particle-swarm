@@ -25,12 +25,13 @@ interface Options {
     socialFactor?: (iteration: number) => number;
     individualFactor?: (iteration: number) => number;
     inertiaFactor?: (iteration: number) => number;
-    callbackFn?: (meta: {
-        globalBestPosition: number[];
-        globalBestFitness: number;
-        iteration: number;
-        population: Particle[];
-    }) => void;
+    callbackFn?: (meta: IterationMeta) => void;
+}
+interface IterationMeta {
+    globalBestPosition: number[];
+    globalBestFitness: number;
+    iteration: number;
+    population: Particle[];
 }
 declare class ParticleSwarmOptimizer {
     private readonly options;
@@ -41,12 +42,7 @@ declare class ParticleSwarmOptimizer {
         globalBestPosition: number[];
         globalBestFitness: number;
     };
-    notifyListeners(payload: {
-        iteration: number;
-        globalBestFitness: number;
-        globalBestPosition: number[];
-        population: Particle[];
-    }): void;
+    notifyListeners(meta: IterationMeta): void;
     isDesiredFitness(globalBestFitness: number): boolean;
     updatePopulation(population: Particle[], globalBestPosition: number[], iteration: number): void;
     createParticle(): Particle;

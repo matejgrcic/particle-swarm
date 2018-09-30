@@ -27,12 +27,14 @@ interface Options {
     socialFactor?: (iteration: number) => number;
     individualFactor?: (iteration: number) => number;
     inertiaFactor?: (iteration: number) => number;
-    callbackFn?: (meta: {
-        globalBestPosition: number[],
-        globalBestFitness: number,
-        iteration: number,
-        population: Particle[],
-    }) => void;
+    callbackFn?: (meta: IterationMeta) => void;
+}
+
+interface IterationMeta {
+    globalBestPosition: number[];
+    globalBestFitness: number;
+    iteration: number;
+    population: Particle[];
 }
 
 const defaultOptions = {
@@ -93,16 +95,11 @@ class ParticleSwarmOptimizer {
         return { globalBestPosition: particle!.bestPosition, globalBestFitness: particle!.bestFitness };
     }
 
-    notifyListeners(payload: {
-        iteration: number,
-        globalBestFitness: number,
-        globalBestPosition: number[],
-        population: Particle[]
-    }): void {
+    notifyListeners(meta: IterationMeta): void {
         if (!this.options.callbackFn) {
             return;
         }
-        this.options.callbackFn(payload);
+        this.options.callbackFn(meta);
     }
 
     isDesiredFitness(globalBestFitness: number): boolean {
