@@ -1,4 +1,4 @@
-var createOptimizer = require('../dist/index.js').default;
+var createOptimizer = require('particle-swarm').default;
 
 var solution = createOptimizer({
     maxVelocity:[4.05],
@@ -8,7 +8,7 @@ var solution = createOptimizer({
     populationSize: 30,
     numberOfDimensions: 1,
     maxIterations: 50,
-    fitnessFunction: (x) => x*x,
+    fitnessFunction: (x) => x * x,
 }).start();
 
 console.log(solution);
